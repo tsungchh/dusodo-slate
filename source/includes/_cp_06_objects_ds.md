@@ -129,4 +129,8 @@ Drawbacks: at the class level, it leads to wide interfaces. it requires introduc
 
 ## Data Transfer Object ##
 
+- Class with public variables and no functions.
+- Structures to communicate with databases, parsing messages from sockets...
+- Developers put business logic in them => Error!
+Examples: Beans, ActiveRecord
 
