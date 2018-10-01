@@ -60,9 +60,11 @@ Pass enough information to be able to log the error in the catch. A stack trace 
 Sometimes is very useful to write a simple wrapper that catches an translates exceptions from a third-party API => minimize the dependencies upon it and you can move to other different library without much penalty.
 
 ## Deﬁne the Normal Flow 
-SPECIAL CASE PATTERN [Fowler]: you create a class or configure an object so that it handles a special case for you => the client code does not have to deal with exceptional behavior because is encapsulated. 
+SPECIAL CASE PATTERN [Fowler](https://martinfowler.com/eaaCatalog/specialCase.html): 
+you create a class or configure an object so that it handles a special case for you => the client code does not have to deal with exceptional behavior because is encapsulated. 
 
-Example:
+> What's wrong here?
+
 ```java
 try {
   MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
@@ -71,7 +73,9 @@ try {
   m_total += getMealPerDiem();
 }
 ```
-vs:
+
+> handle per diem in the class
+
 ```java
 MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
 m_total += expenses.getTotal();
@@ -84,12 +88,16 @@ public class PerDiemMealExpenses implements MealExpenses {
 }
 
 ```
+
 ## Don’t Return Null
+
 If you return null then you have to manage "the null" with if's...".
 
 When we return null we are creating work for ourselves.
 
 You can return an empty list and clean up the code:
+
+> returning null
 
 ```java
 List<Employee> employees = getEmployees();
@@ -99,7 +107,9 @@ if (employees != null) {
   }
 }
 ```
-vs
+
+> v.s. return empty class
+
 ```java
 List<Employee> employees = getEmployees();
 for(Employee e : employees) {
@@ -111,6 +121,8 @@ public List<Employee> getEmployees() {
      return Collections.emptyList();
 }
 ```
+
+
 ## Don’t Pass Null 
 **Returning null from methods is bad, but passing null into methods is worse**
 
