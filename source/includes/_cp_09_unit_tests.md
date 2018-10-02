@@ -7,14 +7,18 @@ The Agile and TDD movements have encouraged many programmers to write unit tests
 * **Second Law**: You may not write more of a unit test than is sufficient to fail, and not compiling is failing.
 * **Third Law**: You may not write more production code than is sufficient to pass the currently failing test.
 
+<aside class="notes">
+Cycle of 30 secs long. tests should be written a few secs ahead of the production code.
+</aside>
+
 If we follow these rules we will write dozens of tests per day, hundreds of tests per month and thousands of tests every year. These tests can rival the size of the production code and can present a daunting management problem.
 
 ## Keeping Tests Clean 
 Dirty tests are equivalent or worse than having no tests! Need to follow the same rules of well-named variables, short & descriptive functions.
 
-Book example story: When managers asked why their estimates were getting so large, the developers blamed the tests. In the end they were forced to discard the test suite entirely.
+Example: When managers asked why their estimates were getting so large, the developers blamed the tests. In the end they were forced to discard the test suite entirely.
 
-But without a test suite:
+Without a test suite:
 * We lost the ability to make sure that changes work as expected and do not break other parts of our system.
 * We start to fear making changes.
 * We stop cleaning our production code => more harm than good.
@@ -73,8 +77,6 @@ public void testGetPageHierarchyAsXml() throws Exception {
 **Readability makes clean test.**
 Clarity, simplicity and density of expression => say a lot with a few expressions as possible.
 
-The test code must be designed to be read.
-
 **BUILD-OPERATE-CHECK** pattern:
 * Build: the first part builds up the test data.
 * Operate: the second part operates on that test data.
@@ -88,7 +90,7 @@ Functions and utilities that make the test more convenient to write and easier t
 It requires a continued refactoring.
 
 ## A Dual Standard 
-The code within the testing API will be simple, succint, expressive but it need not be as efficient as production code. It runs in a test environment and it has different needs.
+The code within the testing API will be simple, succint, expressive but it need not be as **efficient** as production code. It runs in a test environment and it has different needs.
 
 You can write code that may break rules or is not very efficient but is ok if it makes the test easy to understand.
 
@@ -99,6 +101,30 @@ This is a good guideline but the best thing we can say is that **the number of a
 
 ## Single Concept per Test 
 Better than one assert per test.
+
+> Tough to understand
+
+```java
+
+public void turnOnLoTempAlarmAtThreshold() {
+  hw.setTemp(WAY_TOO_COLD);
+  controller.tic();
+  assertTrue(hw.heaterState());
+  assertTrue(hw.blowerState());
+  assertFalse(hw.collerState());
+  ...
+}
+```
+
+> Better version: hide the details of tic function and use upper case to represent 'on', lowercase for 'off' for each state. (DSL)
+
+```java
+
+public void turnOnLoTempAlarmAtThreshold() {
+  wayTooCold();
+  assertEquals("HBchL", hw.getState());
+}
+```
 
 **Best rule:** 
 * **You should minimize the number of asserts per concept and test just one concept per test function**
@@ -112,4 +138,3 @@ Better than one assert per test.
 
 ## Conclusion
 **If you let the test rot, then your code will rot too. Keep your test clean!**
-
