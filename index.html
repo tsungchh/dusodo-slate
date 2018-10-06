@@ -346,6 +346,9 @@
                   <li>
                     <a href="#isolating-from-change" class="toc-h2 toc-link" data-title="Isolating from Change">Isolating from Change</a>
                   </li>
+                  <li>
+                    <a href="#dip-dependency-inversion-principle-v-s-di-dependency-injection-v-s-ioc-inversion-of-control" class="toc-h2 toc-link" data-title="DIP (Dependency Inversion Principle) v.s. DI (Dependency injection) v.s. IoC (Inversion of Control)">DIP (Dependency Inversion Principle) v.s. DI (Dependency injection) v.s. IoC (Inversion of Control)</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -741,7 +744,18 @@ Clarity, simplicity and density of expression =&gt; say a lot with a few express
 <p>Functions and utilities that make the test more convenient to write and easier to read.</p>
 
 <p>It requires a continued refactoring.</p>
-<h2 id='a-dual-standard'>A Dual Standard</h2>
+<pre class="highlight ruby tab-ruby"><code>  <span class="n">context</span> <span class="s2">"for a visitor"</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="kp">nil</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should</span>     <span class="n">permit</span><span class="p">(</span><span class="ss">:show</span><span class="p">)</span>    <span class="p">}</span>
+
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:create</span><span class="p">)</span>  <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span>     <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:update</span><span class="p">)</span>  <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:edit</span><span class="p">)</span>    <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:destroy</span><span class="p">)</span> <span class="p">}</span>
+  <span class="k">end</span>
+</code></pre><h2 id='a-dual-standard'>A Dual Standard</h2>
 <p>The code within the testing API will be simple, succint, expressive but it need not be as <strong>efficient</strong> as production code. It runs in a test environment and it has different needs.</p>
 
 <p>You can write code that may break rules or is not very efficient but is ok if it makes the test easy to understand.</p>
@@ -789,12 +803,15 @@ Clarity, simplicity and density of expression =&gt; say a lot with a few express
 <h1 id='chapter-10-classes'>Chapter 10 - Classes</h1>
 <p>Classes belong to higher levels of code organization.</p>
 <h2 id='class-organization'>Class Organization</h2>
-<p>Like a newspapaer article:
-* public static constants
-* private static variables
-* private instance variables
-* public functions
-* private functions</p>
+<p>Like a newspapaer article:</p>
+
+<ul>
+<li>public static constants</li>
+<li>private static variables</li>
+<li>private instance variables</li>
+<li>public functions</li>
+<li>private functions</li>
+</ul>
 <h2 id='encapsulation'>Encapsulation</h2>
 <p>Utitlity functions should be private but could be protected to be accesible by tests in the same package.</p>
 <h2 id='classes-should-be-small'>Classes Should Be Small!</h2>
@@ -807,12 +824,16 @@ Clarity, simplicity and density of expression =&gt; say a lot with a few express
 <p>Avoid to include words like &#39;Processor, Manager, Super&#39; in classnames =&gt; aggregation of responsibilities.</p>
 
 <p>Class <strong>description in 25 words</strong> without &quot;if&quot;, &quot;and&quot;, &quot;or&quot;, &quot;but&quot;...</p>
+
+<aside class="notes">
+<a href="http://agilemodeling.com/artifacts/crcModel.htm" >CRC - Candidate, Responsibilities, Collaborators</a>
+</aside>
 <h2 id='the-single-responsibility-principle'>The Single Responsibility Principle</h2>
 <p><strong>Classes should have one responsibility</strong>--<strong>one reason to change</strong>.</p>
 
 <p>Too many of us think that we are done once the program works. We move on the next problem rather than going back and breaking the classes into decoupled units with single responsibilities.</p>
 
-<p>We have to organize system complexity. A developer should know where to llok to find things and need only understand the directly affected complexity at any given time.</p>
+<p>We have to organize system complexity. A developer should know where to look to find things and need only understand the directly affected complexity at any given time.</p>
 
 <p>We want systems composed of many small classes. Single responsibility and single reason to change. They colaborate with a few others to achieve the desired system behavior.</p>
 <h2 id='cohesion'>Cohesion</h2>
@@ -825,14 +846,91 @@ Clarity, simplicity and density of expression =&gt; say a lot with a few express
 <p>Breaking a large function into many smaller functions often gives us the opportunity to split several smaller classes out as well =&gt; better organization and more transparent structure.</p>
 
 <p>Do it with tests =&gt; write a test suit that verified the precise behavior of the first version. Then tiny little changes, one at a time to get the desired result.</p>
+
+<aside class="notes">
+<a href="https://18f.gsa.gov/2016/06/24/5-lessons-in-object-oriented-design-from-sandi-metz/" > OO Design from Sandi Metz</a>
+</aside>
 <h2 id='organizing-for-change'>Organizing for Change</h2>
+<blockquote>
+<p>Need to open the class of AreaCalculator if we need to add another Shape</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AreaCalculator</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">Area</span><span class="o">(</span><span class="n">Rectangle</span><span class="o">[]</span> <span class="n">shapes</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">area</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">foreach</span> <span class="o">(</span><span class="n">var</span> <span class="n">shape</span> <span class="n">in</span> <span class="n">shapes</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">area</span> <span class="o">+=</span> <span class="n">shape</span><span class="o">.</span><span class="na">Width</span><span class="o">*</span><span class="n">shape</span><span class="o">.</span><span class="na">Height</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">area</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+<blockquote>
+<p>closed it for modification by opening it up for extension</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Shape</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">Area</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="o">:</span> <span class="n">Shape</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="n">Width</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="n">Height</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">override</span> <span class="kt">double</span> <span class="nf">Area</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Width</span><span class="o">*</span><span class="n">Height</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
 <p><strong>Open-Closed Principle</strong> =&gt; Our classes should be open for extension but closed for modification.</p>
 
 <p>Allow new functionality via subclassing.</p>
 
 <p>We incorporate new features by extending the system, not by making modifications to existing code.</p>
 <h2 id='isolating-from-change'>Isolating from Change</h2>
+<blockquote>
+<p>Portfolio v.s. TokyoStockExchange v.s. StockExchange
+Benefit: test for Portfolio could be decoupled from real exchange</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StockExchange</span> <span class="o">{</span>
+  <span class="n">Money</span> <span class="nf">currentPrice</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="n">Portfolio</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">StockExchange</span> <span class="n">exchange</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="nf">Portfolio</span><span class="o">(</span><span class="n">StockExchange</span> <span class="n">exchange</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">exchange</span> <span class="o">=</span> <span class="n">exchange</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
 <p><strong>Dependency Inversion Principle (DIP)</strong> =&gt; Classes should depend upon abstractions, not on concrete details.</p>
+
+<aside class="notes">
+<a href="https://martinfowler.com/articles/dipInTheWild.html"> Reference </a>
+</aside>
+<h2 id='dip-dependency-inversion-principle-v-s-di-dependency-injection-v-s-ioc-inversion-of-control'>DIP (Dependency Inversion Principle) v.s. DI (Dependency injection) v.s. IoC (Inversion of Control)</h2>
+<blockquote>
+<p>method level dependency injection</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="k">class</span> <span class="nc">Player</span>
+  <span class="k">def</span> <span class="nf">takeATurn</span><span class="p">(</span><span class="n">dice</span><span class="p">)</span>
+    <span class="n">dice</span><span class="p">.</span><span class="nf">roll</span><span class="p">()</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>DI is about how one object acquires a dependency. When a dependency is provided externally, then the system is using DI. Example: </p>
+
+<p>IoC is about who initiates the call. If your code initiates a call, it is not IoC, if the container/system/library calls back into code that you provided it, is it IoC. Example: ButtonListener</p>
+
+<p>DIP  is about the level of the abstraction in the messages sent from your code to the thing it is calling. To be sure, using DI or IoC with DIP tends to be more expressive, powerful and domain-aligned, but they are about different dimensions, or forces, in an overall problem.</p>
+
+<p>DI is about wiring, IoC is about direction, and DIP is about shape.</p>
 
       </div>
       <div class="dark-box">
