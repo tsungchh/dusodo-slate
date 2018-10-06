@@ -89,6 +89,20 @@ Functions and utilities that make the test more convenient to write and easier t
 
 It requires a continued refactoring.
 
+```ruby
+  context "for a visitor" do
+    let(:user) { nil }
+
+    it { should     permit(:show)    }
+
+    it { should_not permit(:create)  }
+    it { should_not permit(:new)     }
+    it { should_not permit(:update)  }
+    it { should_not permit(:edit)    }
+    it { should_not permit(:destroy) }
+  end
+```
+
 ## A Dual Standard 
 The code within the testing API will be simple, succint, expressive but it need not be as **efficient** as production code. It runs in a test environment and it has different needs.
 
