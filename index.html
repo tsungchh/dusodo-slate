@@ -1,0 +1,845 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;java&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="java">java</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#chapter-6-objects-and-data-structures" class="toc-h1 toc-link" data-title="Chapter 6 Objects and Data Structures">Chapter 6 Objects and Data Structures</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#data-abstraction" class="toc-h2 toc-link" data-title="Data Abstraction">Data Abstraction</a>
+                  </li>
+                  <li>
+                    <a href="#data-object-anti-symmetry" class="toc-h2 toc-link" data-title="Data/Object Anti-Symmetry">Data/Object Anti-Symmetry</a>
+                  </li>
+                  <li>
+                    <a href="#the-law-of-demeter" class="toc-h2 toc-link" data-title="The Law of Demeter">The Law of Demeter</a>
+                  </li>
+                  <li>
+                    <a href="#data-transfer-object" class="toc-h2 toc-link" data-title="Data Transfer Object">Data Transfer Object</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-7-error-handling" class="toc-h1 toc-link" data-title="Chapter 7 - Error Handling">Chapter 7 - Error Handling</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#use-exceptions-rather-than-return-codes" class="toc-h2 toc-link" data-title="Use Exceptions Rather Than Return Codes">Use Exceptions Rather Than Return Codes</a>
+                  </li>
+                  <li>
+                    <a href="#write-your-try-catch-finally-statement-first" class="toc-h2 toc-link" data-title="Write Your Try-Catch-Finally Statement First">Write Your Try-Catch-Finally Statement First</a>
+                  </li>
+                  <li>
+                    <a href="#use-unchecked-exceptions" class="toc-h2 toc-link" data-title="Use Unchecked Exceptions">Use Unchecked Exceptions</a>
+                  </li>
+                  <li>
+                    <a href="#provide-context-with-exceptions" class="toc-h2 toc-link" data-title="Provide Context with Exceptions">Provide Context with Exceptions</a>
+                  </li>
+                  <li>
+                    <a href="#de-ne-exception-classes-in-terms-of-a-caller-s-needs" class="toc-h2 toc-link" data-title="Deﬁne Exception Classes in Terms of a Caller’s Needs">Deﬁne Exception Classes in Terms of a Caller’s Needs</a>
+                  </li>
+                  <li>
+                    <a href="#de-ne-the-normal-flow" class="toc-h2 toc-link" data-title="Deﬁne the Normal Flow">Deﬁne the Normal Flow</a>
+                  </li>
+                  <li>
+                    <a href="#don-t-return-null" class="toc-h2 toc-link" data-title="Don’t Return Null">Don’t Return Null</a>
+                  </li>
+                  <li>
+                    <a href="#don-t-pass-null" class="toc-h2 toc-link" data-title="Don’t Pass Null">Don’t Pass Null</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-8-boundaries" class="toc-h1 toc-link" data-title="Chapter 8 - Boundaries">Chapter 8 - Boundaries</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#using-third-party-code" class="toc-h2 toc-link" data-title="Using Third-Party Code">Using Third-Party Code</a>
+                  </li>
+                  <li>
+                    <a href="#exploring-and-learning-boundaries" class="toc-h2 toc-link" data-title="Exploring and Learning Boundaries">Exploring and Learning Boundaries</a>
+                  </li>
+                  <li>
+                    <a href="#learning-tests-are-better-than-free" class="toc-h2 toc-link" data-title="Learning Tests Are Better Than Free">Learning Tests Are Better Than Free</a>
+                  </li>
+                  <li>
+                    <a href="#using-code-that-does-not-yet-exist" class="toc-h2 toc-link" data-title="Using Code That Does Not Yet Exist">Using Code That Does Not Yet Exist</a>
+                  </li>
+                  <li>
+                    <a href="#clean-boundaries" class="toc-h2 toc-link" data-title="Clean Boundaries">Clean Boundaries</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-9-unit-tests" class="toc-h1 toc-link" data-title="Chapter 9 - Unit tests">Chapter 9 - Unit tests</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#the-three-laws-of-tdd" class="toc-h2 toc-link" data-title="The Three Laws of TDD">The Three Laws of TDD</a>
+                  </li>
+                  <li>
+                    <a href="#keeping-tests-clean" class="toc-h2 toc-link" data-title="Keeping Tests Clean">Keeping Tests Clean</a>
+                  </li>
+                  <li>
+                    <a href="#tests-enable-the-ilities" class="toc-h2 toc-link" data-title="Tests Enable the -ilities">Tests Enable the -ilities</a>
+                  </li>
+                  <li>
+                    <a href="#clean-tests" class="toc-h2 toc-link" data-title="Clean Tests">Clean Tests</a>
+                  </li>
+                  <li>
+                    <a href="#domain-speci-c-testing-language" class="toc-h2 toc-link" data-title="Domain-Speciﬁc Testing Language">Domain-Speciﬁc Testing Language</a>
+                  </li>
+                  <li>
+                    <a href="#a-dual-standard" class="toc-h2 toc-link" data-title="A Dual Standard">A Dual Standard</a>
+                  </li>
+                  <li>
+                    <a href="#one-assert-per-test" class="toc-h2 toc-link" data-title="One Assert per Test">One Assert per Test</a>
+                  </li>
+                  <li>
+                    <a href="#single-concept-per-test" class="toc-h2 toc-link" data-title="Single Concept per Test">Single Concept per Test</a>
+                  </li>
+                  <li>
+                    <a href="#f-i-r-s-t" class="toc-h2 toc-link" data-title="F.I.R.S.T">F.I.R.S.T</a>
+                  </li>
+                  <li>
+                    <a href="#conclusion" class="toc-h2 toc-link" data-title="Conclusion">Conclusion</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-10-classes" class="toc-h1 toc-link" data-title="Chapter 10 - Classes">Chapter 10 - Classes</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#class-organization" class="toc-h2 toc-link" data-title="Class Organization">Class Organization</a>
+                  </li>
+                  <li>
+                    <a href="#encapsulation" class="toc-h2 toc-link" data-title="Encapsulation">Encapsulation</a>
+                  </li>
+                  <li>
+                    <a href="#classes-should-be-small" class="toc-h2 toc-link" data-title="Classes Should Be Small!">Classes Should Be Small!</a>
+                  </li>
+                  <li>
+                    <a href="#the-single-responsibility-principle" class="toc-h2 toc-link" data-title="The Single Responsibility Principle">The Single Responsibility Principle</a>
+                  </li>
+                  <li>
+                    <a href="#cohesion" class="toc-h2 toc-link" data-title="Cohesion">Cohesion</a>
+                  </li>
+                  <li>
+                    <a href="#maintaining-cohesion-results-in-many-small-classes" class="toc-h2 toc-link" data-title="Maintaining Cohesion Results in Many Small Classes">Maintaining Cohesion Results in Many Small Classes</a>
+                  </li>
+                  <li>
+                    <a href="#organizing-for-change" class="toc-h2 toc-link" data-title="Organizing for Change">Organizing for Change</a>
+                  </li>
+                  <li>
+                    <a href="#isolating-from-change" class="toc-h2 toc-link" data-title="Isolating from Change">Isolating from Change</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='chapter-6-objects-and-data-structures'>Chapter 6 Objects and Data Structures</h1><h2 id='data-abstraction'>Data Abstraction</h2>
+<blockquote>
+<p>Concrete Vehicle</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vehicle</span> <span class="o">{</span>
+ <span class="kt">double</span> <span class="nf">getFuelTankCapacityInGallons</span><span class="o">();</span>
+ <span class="kt">double</span> <span class="nf">getGallonsOfGasoline</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Abstract Vehicle</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Vehicle</span> <span class="o">{</span>
+ <span class="kt">double</span> <span class="nf">getPercentFuelRemaining</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+<ul>
+<li>Hiding implementation is about abstractions. </li>
+<li>Expose abstract interfaces that allow users to manipulate the <code>essence</code> of the data, without knowing the implementation.</li>
+<li>It&#39;s not about using getter and setter.</li>
+</ul>
+
+<aside class="success">
+Information v.s. data 
+</aside>
+<h2 id='data-object-anti-symmetry'>Data/Object Anti-Symmetry</h2>
+<blockquote>
+<p>OO and Polymorphic style </p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Square</span> <span class="kd">implements</span> <span class="n">Shape</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Point</span> <span class="n">topLeft</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">double</span> <span class="n">side</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">area</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">side</span><span class="o">*</span><span class="n">side</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>procedural style</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Square</span> <span class="kd">implements</span> <span class="n">Shape</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Point</span> <span class="n">topLeft</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">double</span> <span class="n">side</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">area</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">side</span><span class="o">*</span><span class="n">side</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Geometry</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">area</span><span class="o">(</span><span class="n">Object</span> <span class="n">Shape</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchShapeException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">shape</span> <span class="k">instanceof</span> <span class="n">Square</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">Sqaure</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="n">Square</span><span class="o">)</span><span class="n">shape</span><span class="o">;</span>
+      <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">side</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="na">side</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre><h3 id='objects-vs-data-structures'>Objects vs Data structures</h3>
+<ul>
+<li>Objects hide their data behind abstractions and expose functions that operate on that data.</li>
+<li>Data structures expose their data and have no meaningful functions.</li>
+</ul>
+<h3 id='oo-code-vs-procedural-code'>OO code vs Procedural code</h3>
+<ul>
+<li>OO code makes it easy to add new classes without changing existing functions</li>
+<li><p>Procedural code makes it easy to add new functions without changing the existing data structures.</p></li>
+<li><p>OO code makes hard to add new functions because all the classes must change.</p></li>
+<li><p>Procedural code makes it hard to add new data structures because all the functions must change.</p></li>
+</ul>
+
+<aside class="success">
+<p> What if we need to add `parameter()` function? </p>
+<p> What if we need to add new shape? </p>
+</aside>
+
+<aside class="warning">
+Don't create Hybrid - half object and half data structure.
+</aside>
+<h2 id='the-law-of-demeter'>The Law of Demeter</h2>
+<blockquote>
+<p>Avoid this (called train wreck):</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="n">String</span> <span class="n">outputDir</span> <span class="o">=</span> <span class="n">ctxt</span><span class="o">.</span><span class="na">getOptions</span><span class="o">().</span><span class="na">getScratchDir</span><span class="o">().</span><span class="na">getAbsolutePath</span><span class="o">();</span>
+</code></pre>
+<blockquote>
+<p>Try to split them, if <code>ctxt</code>, <code>opts</code>, <code>scratchDir</code> are data structure, then exposing their internal structure doesn&#39;t violate Demeter.
+If they are objects, knowledge of internal structure violates the Laws of Demeter. What could we do in this case?</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="n">Options</span> <span class="n">opts</span> <span class="o">=</span> <span class="n">ctxt</span><span class="o">.</span><span class="na">getOptions</span><span class="o">();</span>
+<span class="n">File</span> <span class="n">scratchDir</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="na">getScratchDir</span><span class="o">();</span>
+<span class="kd">final</span> <span class="n">String</span> <span class="n">outputDir</span> <span class="o">=</span> <span class="n">scratchDir</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">();</span>
+</code></pre>
+<blockquote>
+<p>Better approach for ctxt: ctx hide its internals and we are not violating Demeters&#39; Law.</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="n">BufferedOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="n">ctxt</span><span class="o">.</span><span class="na">createScratchFileStream</span><span class="o">(</span><span class="n">classFileName</span><span class="o">);</span>
+</code></pre>
+<p>loose coupling, principle of least knowledge</p>
+
+<p>A method <em>f</em> of a class <em>C</em> should only call methods of these:</p>
+
+<ul>
+<li>C</li>
+<li>An object created by <em>f</em></li>
+<li>An object passed as an argument to <em>f</em></li>
+<li>An object held in an instance variable of <em>C</em></li>
+</ul>
+
+<aside class="warning">
+Drawbacks: at the class level, it leads to wide interfaces. it requires introducing many auxiliary methods.
+</aside>
+<h2 id='data-transfer-object'>Data Transfer Object</h2>
+<ul>
+<li>Class with public variables and no functions.</li>
+<li>Structures to communicate with databases, parsing messages from sockets...</li>
+<li>Developers put business logic in them =&gt; Error!
+Examples: Beans, ActiveRecord</li>
+</ul>
+<h1 id='chapter-7-error-handling'>Chapter 7 - Error Handling</h1>
+<p>Error handling is important but if it obscures logic it&#39;s wrong.</p>
+<h2 id='use-exceptions-rather-than-return-codes'>Use Exceptions Rather Than Return Codes</h2>
+<blockquote>
+<p>Try to separate the algorithm from error handling:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendShutDown</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">DeviceHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">getHandle</span><span class="o">(</span><span class="n">DEV1</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">handle</span> <span class="o">!=</span> <span class="n">DeviceHnadle</span><span class="o">.</span><span class="na">INVALID</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">DeviceRecord</span> <span class="n">record</span> <span class="o">=</span> <span class="n">retrieveDeviceRecord</span><span class="o">(</span><span class="n">handle</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">record</span><span class="o">.</span><span class="na">getStatus</span><span class="o">()</span> <span class="o">!=</span> <span class="n">DEVICE_SUSPENDED</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Try to separate the algorithm from error handling:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendShutDown</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">tryToShutDown</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">DeviceShutDownError</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">logger</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">tryToShutDown</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">DeviceShutDownError</span> <span class="o">{</span>
+  <span class="n">DeviceHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">getHandle</span><span class="o">(</span><span class="n">DEV1</span><span class="o">);</span>
+  <span class="n">DeviceRecord</span> <span class="n">record</span> <span class="o">=</span> <span class="n">retrieveDeviceRecord</span><span class="o">(</span><span class="n">handle</span><span class="o">);</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="n">DeviceHandle</span> <span class="nf">getHandle</span><span class="o">(...)</span> <span class="o">{</span>
+  <span class="o">...</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">DeviceShutDownError</span><span class="o">(...</span><span class="na">msg</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+<p>It is better to throw an exception.
+- The calling code is cleaner.
+- Its logic is not obscured by error handling.</p>
+<h2 id='write-your-try-catch-finally-statement-first'>Write Your Try-Catch-Finally Statement First</h2>
+<p>Try blocks are like transactions =&gt; <em>catch</em> has to leave your program in a consistent state, no matter what happens in the try.</p>
+
+<p>Write test that force exceptions and add behavior to satisfy your test.</p>
+<h2 id='use-unchecked-exceptions'>Use Unchecked Exceptions</h2>
+<p>Your code would not compile if the signature don&#39;t match what your code do.</p>
+
+<p>Some programing languages do not have it and you can build robust software with them.</p>
+
+<p>Declaring the exception between you and <em>the catch</em> is a Open/Close Principle violation =&gt; a change at a low level can force changes on many higher levels.</p>
+
+<p>Encapsulation is broken because all functions in the path of a throw must know about details of that low-level exception.</p>
+<h2 id='provide-context-with-exceptions'>Provide Context with Exceptions</h2>
+<p>Pass enough information to be able to log the error in the catch. A stack trace won&#39;t tell you the <em>intent</em> of the operation that failed.</p>
+<h2 id='de-ne-exception-classes-in-terms-of-a-caller-s-needs'>Deﬁne Exception Classes in Terms of a Caller’s Needs</h2>
+<p>Sometimes is very useful to write a simple wrapper that catches an translates exceptions from a third-party API =&gt; minimize the dependencies upon it and you can move to other different library without much penalty.</p>
+<h2 id='de-ne-the-normal-flow'>Deﬁne the Normal Flow</h2>
+<p>SPECIAL CASE PATTERN <a href="https://martinfowler.com/eaaCatalog/specialCase.html">Fowler</a>: 
+you create a class or configure an object so that it handles a special case for you =&gt; the client code does not have to deal with exceptional behavior because is encapsulated. </p>
+
+<blockquote>
+<p>What&#39;s wrong here?</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">{</span>
+  <span class="n">MealExpenses</span> <span class="n">expenses</span> <span class="o">=</span> <span class="n">expenseReportDAO</span><span class="o">.</span><span class="na">getMeals</span><span class="o">(</span><span class="n">employee</span><span class="o">.</span><span class="na">getID</span><span class="o">());</span>
+  <span class="n">m_total</span> <span class="o">+=</span> <span class="n">expenses</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">MealExpensesNotFound</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">m_total</span> <span class="o">+=</span> <span class="n">getMealPerDiem</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>handle per diem in the class</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="n">MealExpenses</span> <span class="n">expenses</span> <span class="o">=</span> <span class="n">expenseReportDAO</span><span class="o">.</span><span class="na">getMeals</span><span class="o">(</span><span class="n">employee</span><span class="o">.</span><span class="na">getID</span><span class="o">());</span>
+<span class="n">m_total</span> <span class="o">+=</span> <span class="n">expenses</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span>
+<span class="c1">// the Exception is handled in the DAO and getMails returns</span>
+<span class="c1">// PerDiemMealExpenses if an error is thrown...</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PerDiemMealExpenses</span> <span class="kd">implements</span> <span class="n">MealExpenses</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getTotal</span><span class="o">()</span> <span class="o">{</span>
+ <span class="c1">// return the per diem default</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre><h2 id='don-t-return-null'>Don’t Return Null</h2>
+<p>If you return null then you have to manage &quot;the null&quot; with if&#39;s...&quot;.</p>
+
+<p>When we return null we are creating work for ourselves.</p>
+
+<p>You can return an empty list and clean up the code:</p>
+
+<blockquote>
+<p>returning null</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="n">getEmployees</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">employees</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">for</span><span class="o">(</span><span class="n">Employee</span> <span class="n">e</span> <span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">totalPay</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="na">getPay</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>v.s. return empty class</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="n">getEmployees</span><span class="o">();</span>
+<span class="k">for</span><span class="o">(</span><span class="n">Employee</span> <span class="n">e</span> <span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">totalPay</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="na">getPay</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="c1">//...</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="nf">getEmployees</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span><span class="o">(</span> <span class="o">..</span> <span class="n">there</span> <span class="n">are</span> <span class="n">no</span> <span class="n">employees</span> <span class="o">..</span> <span class="o">)</span>
+     <span class="k">return</span> <span class="n">Collections</span><span class="o">.</span><span class="na">emptyList</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre><h2 id='don-t-pass-null'>Don’t Pass Null</h2>
+<p><strong>Returning null from methods is bad, but passing null into methods is worse</strong></p>
+
+<p>You have to deal with null, with if&#39;s or with assertions at the beginning asserts are good documentation).</p>
+
+<p>A null in an argument is an indication of a problem.</p>
+<h1 id='chapter-8-boundaries'>Chapter 8 - Boundaries</h1>
+<p>Boundaries between applications, 3rd-party, open source software or apps built by other teams</p>
+<h2 id='using-third-party-code'>Using Third-Party Code</h2>
+<blockquote>
+<p>If we need a Map of Sensors you can create something like:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="c1">// Without generics</span>
+<span class="n">Map</span> <span class="n">sensors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
+<span class="n">Sensor</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="n">Sensor</span><span class="o">)</span> <span class="n">sensors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">sensorId</span><span class="o">);</span>
+<span class="c1">// With generics:</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Sensor</span><span class="o">&gt;</span> <span class="n">sensors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Sensor</span><span class="o">&gt;();</span>
+<span class="n">Sensor</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sensors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">sensorId</span><span class="o">);</span>
+</code></pre>
+<blockquote>
+<p>This is not clean code. If you use instances of Map<Sensor>
+in your system if the Map Interface changes you will have to change a lot of references.
+Try to encapsulate any boundary interface like Map inside a the class:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sensor</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Map</span> <span class="n">sensors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
+
+  <span class="kd">public</span> <span class="n">Sensor</span> <span class="nf">getById</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">(</span><span class="n">Sensor</span><span class="o">)</span> <span class="n">sensor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+<p>Natural tension between provider/user of an interface. 
+<strong>Provider</strong> =&gt; focus on wide audience.
+<strong>User</strong> =&gt; focus on their particular needs.</p>
+
+<p>Example: java.util.Map
+Map is an interface with a lot of methods: clear, containsKey, containsValue, get, isEmpty, put, putAll, remove, size...
+It is very flexible, any user can add items of any type to any Map, but as a user, I might only need one or two methods.</p>
+
+<aside class="success">
+Always use wrapper to wrap 3rd-party code so the boundaries are clear.
+</aside>
+
+<aside class="warning">
+Why this is bad?
+Passing an instance of `Map<Sensor>` means that there will be a lot of places to fix if the interface of Map changes.
+</aside>
+<h2 id='exploring-and-learning-boundaries'>Exploring and Learning Boundaries</h2>
+<p><strong>Learning tests</strong> instead of experimenting an trying out the new stuff in our production code, we could write some tests to explore our understanding of the third-party code. The tests focus on what we want out of the API.</p>
+
+<aside class="notes">
+Console tests v.s. leanring tests
+</aside>
+ 
+<h2 id='learning-tests-are-better-than-free'>Learning Tests Are Better Than Free</h2>
+<p>Since you have to learn the 3rd party code anyway, learning tests are an easy way to learn <em>and</em> future-proof use of the API. With each release comes a new risk =&gt; we run the learning tests to see the changes.</p>
+
+<p>Without these tests the migration is easier, without them we could stay with the old version longer than we should.</p>
+<h2 id='using-code-that-does-not-yet-exist'>Using Code That Does Not Yet Exist</h2>
+<p>Sometimes you have boundaries in your system that represents things that had not been designed yet.</p>
+
+<p>You can create your own interface with the idea of how this should work and implement a Fake implementation for testing purposes.</p>
+
+<p>Example: Adapter pattern and use fake adpater for testing.</p>
+
+<aside class="notes">
+TDD?
+</aside>
+<h2 id='clean-boundaries'>Clean Boundaries</h2>
+<p>Good software designs accommodate change without huge investments and rework.
+Code at the boundaries needs clear separation and tests that define expectations.
+Wrap them or use an Adapter to convert from our perfect interface to the provided interface.</p>
+<h1 id='chapter-9-unit-tests'>Chapter 9 - Unit tests</h1>
+<p>The Agile and TDD movements have encouraged many programmers to write unit tests but many of them have missed important points of writing good tests.</p>
+<h2 id='the-three-laws-of-tdd'>The Three Laws of TDD</h2>
+<ul>
+<li><strong>First Law</strong>: You may not write production code until you have written a failing unit test.</li>
+<li><strong>Second Law</strong>: You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</li>
+<li><strong>Third Law</strong>: You may not write more production code than is sufficient to pass the currently failing test.</li>
+</ul>
+
+<aside class="notes">
+Cycle of 30 secs long. tests should be written a few secs ahead of the production code.
+</aside>
+
+<p>If we follow these rules we will write dozens of tests per day, hundreds of tests per month and thousands of tests every year. These tests can rival the size of the production code and can present a daunting management problem.</p>
+<h2 id='keeping-tests-clean'>Keeping Tests Clean</h2>
+<p>Dirty tests are equivalent or worse than having no tests! Need to follow the same rules of well-named variables, short &amp; descriptive functions.</p>
+
+<p>Example: When managers asked why their estimates were getting so large, the developers blamed the tests. In the end they were forced to discard the test suite entirely.</p>
+
+<p>Without a test suite:
+* We lost the ability to make sure that changes work as expected and do not break other parts of our system.
+* We start to fear making changes.
+* We stop cleaning our production code =&gt; more harm than good.
+* =&gt; bugs, frustrated customers, the feeling that our testing effort had failed.</p>
+
+<p><strong>Test code is just as important as production code, its not a second-class citizen</strong>. It requires thought, design and care. Keep it as clean as production code.</p>
+<h2 id='tests-enable-the-ilities'>Tests Enable the -ilities</h2>
+<p><strong>If you don&#39;t keep your test clean, you will lose them</strong></p>
+
+<p>Unit tests keep our code flexible, maintainable and reusable. Without them every change is a possible bug.</p>
+
+<p>You can improve that architecture and design without fear!</p>
+<h2 id='clean-tests'>Clean Tests</h2>
+<blockquote>
+<p>Example - Without refactor:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetPageHieratchyAsXml</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+<span class="o">{</span>
+  <span class="n">crawler</span><span class="o">.</span><span class="na">addPage</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">PathParser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"PageOne"</span><span class="o">));</span>
+  <span class="n">crawler</span><span class="o">.</span><span class="na">addPage</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">PathParser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"PageOne.ChildOne"</span><span class="o">));</span>
+  <span class="n">crawler</span><span class="o">.</span><span class="na">addPage</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">PathParser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"PageTwo"</span><span class="o">));</span>
+
+  <span class="n">request</span><span class="o">.</span><span class="na">setResource</span><span class="o">(</span><span class="s">"root"</span><span class="o">);</span>
+  <span class="n">request</span><span class="o">.</span><span class="na">addInput</span><span class="o">(</span><span class="s">"type"</span><span class="o">,</span> <span class="s">"pages"</span><span class="o">);</span>
+  <span class="n">Responder</span> <span class="n">responder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SerializedPageResponder</span><span class="o">();</span>
+  <span class="n">SimpleResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="o">(</span><span class="n">SimpleResponse</span><span class="o">)</span> <span class="n">responder</span><span class="o">.</span><span class="na">makeResponse</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">FitNesseContext</span><span class="o">(</span><span class="n">root</span><span class="o">),</span> <span class="n">request</span>
+  <span class="o">);</span>
+  <span class="n">String</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getContent</span><span class="o">();</span>
+
+  <span class="n">assertEquals</span><span class="o">(</span><span class="s">"text/xml"</span><span class="o">,</span> <span class="n">response</span><span class="o">.</span><span class="na">getContentType</span><span class="o">());</span>
+  <span class="n">assertSubString</span><span class="o">(</span><span class="s">"&lt;name&gt;PageOne&lt;/name&gt;"</span><span class="o">,</span> <span class="n">xml</span><span class="o">);</span>
+  <span class="n">assertSubString</span><span class="o">(</span><span class="s">"&lt;name&gt;PageTwo&lt;/name&gt;"</span><span class="o">,</span> <span class="n">xml</span><span class="o">);</span>
+  <span class="n">assertSubString</span><span class="o">(</span><span class="s">"&lt;name&gt;ChildOne&lt;/name&gt;"</span><span class="o">,</span> <span class="n">xml</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Refactored:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetPageHierarchyAsXml</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+  <span class="n">makePages</span><span class="o">(</span><span class="s">"PageOne"</span><span class="o">,</span> <span class="s">"PageOne.ChildOne"</span><span class="o">,</span> <span class="s">"PageTwo"</span><span class="o">);</span>
+
+  <span class="n">submitRequest</span><span class="o">(</span><span class="s">"root"</span><span class="o">,</span> <span class="s">"type:pages"</span><span class="o">);</span>
+
+  <span class="n">assertResponseIsXML</span><span class="o">();</span>
+  <span class="n">assertResponseContains</span><span class="o">(</span>
+    <span class="s">"&lt;name&gt;PageOne&lt;/name&gt;"</span><span class="o">,</span> <span class="s">"&lt;name&gt;PageTwo&lt;/name&gt;"</span><span class="o">,</span> <span class="s">"&lt;name&gt;ChildOne&lt;/name&gt;"</span>
+  <span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+<p><strong>Readability makes clean test.</strong>
+Clarity, simplicity and density of expression =&gt; say a lot with a few expressions as possible.</p>
+
+<p><strong>BUILD-OPERATE-CHECK</strong> pattern:
+* Build: the first part builds up the test data.
+* Operate: the second part operates on that test data.
+* Check: the third part checks that the operation yielded the expected results</p>
+
+<p>You can read the test very quickly without being overwhelmed by details.</p>
+<h2 id='domain-speci-c-testing-language'>Domain-Speciﬁc Testing Language</h2>
+<p>Functions and utilities that make the test more convenient to write and easier to read.</p>
+
+<p>It requires a continued refactoring.</p>
+<h2 id='a-dual-standard'>A Dual Standard</h2>
+<p>The code within the testing API will be simple, succint, expressive but it need not be as <strong>efficient</strong> as production code. It runs in a test environment and it has different needs.</p>
+
+<p>You can write code that may break rules or is not very efficient but is ok if it makes the test easy to understand.</p>
+
+<p>Dual standard: There are things that you might never do in a production environment that are perfectly fine in a test environment.</p>
+<h2 id='one-assert-per-test'>One Assert per Test</h2>
+<p>This is a good guideline but the best thing we can say is that <strong>the number of asserts in a test should be minimized.</strong></p>
+<h2 id='single-concept-per-test'>Single Concept per Test</h2>
+<p>Better than one assert per test.</p>
+
+<blockquote>
+<p>Tough to understand</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOnLoTempAlarmAtThreshold</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">hw</span><span class="o">.</span><span class="na">setTemp</span><span class="o">(</span><span class="n">WAY_TOO_COLD</span><span class="o">);</span>
+  <span class="n">controller</span><span class="o">.</span><span class="na">tic</span><span class="o">();</span>
+  <span class="n">assertTrue</span><span class="o">(</span><span class="n">hw</span><span class="o">.</span><span class="na">heaterState</span><span class="o">());</span>
+  <span class="n">assertTrue</span><span class="o">(</span><span class="n">hw</span><span class="o">.</span><span class="na">blowerState</span><span class="o">());</span>
+  <span class="n">assertFalse</span><span class="o">(</span><span class="n">hw</span><span class="o">.</span><span class="na">collerState</span><span class="o">());</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Better version: hide the details of tic function and use upper case to represent &#39;on&#39;, lowercase for &#39;off&#39; for each state. (DSL)</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOnLoTempAlarmAtThreshold</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">wayTooCold</span><span class="o">();</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="s">"HBchL"</span><span class="o">,</span> <span class="n">hw</span><span class="o">.</span><span class="na">getState</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre>
+<p><strong>Best rule:</strong> 
+* <strong>You should minimize the number of asserts per concept and test just one concept per test function</strong></p>
+<h2 id='f-i-r-s-t'>F.I.R.S.T</h2>
+<ul>
+<li><strong>Fast</strong>: you want to run them fequently.</li>
+<li><strong>Independent</strong>: should not depend on each other.</li>
+<li><strong>Repeatable</strong>: in any environment, in your laptop, without network...</li>
+<li><strong>Self-Validating</strong>: should have a boolean output... not a log that you have to read to know the result.</li>
+<li><strong>Timely</strong>: Write them before the production code, if you do it after maybe the production code will be hard to test.</li>
+</ul>
+<h2 id='conclusion'>Conclusion</h2>
+<p><strong>If you let the test rot, then your code will rot too. Keep your test clean!</strong></p>
+<h1 id='chapter-10-classes'>Chapter 10 - Classes</h1>
+<p>Classes belong to higher levels of code organization.</p>
+<h2 id='class-organization'>Class Organization</h2>
+<p>Like a newspapaer article:
+* public static constants
+* private static variables
+* private instance variables
+* public functions
+* private functions</p>
+<h2 id='encapsulation'>Encapsulation</h2>
+<p>Utitlity functions should be private but could be protected to be accesible by tests in the same package.</p>
+<h2 id='classes-should-be-small'>Classes Should Be Small!</h2>
+<p>... and then should be smaller than that!.</p>
+
+<p>With functions we count lines, with classes we count responsibilities.</p>
+
+<p>Too many responsibilities =&gt; God class.</p>
+
+<p>Avoid to include words like &#39;Processor, Manager, Super&#39; in classnames =&gt; aggregation of responsibilities.</p>
+
+<p>Class <strong>description in 25 words</strong> without &quot;if&quot;, &quot;and&quot;, &quot;or&quot;, &quot;but&quot;...</p>
+<h2 id='the-single-responsibility-principle'>The Single Responsibility Principle</h2>
+<p><strong>Classes should have one responsibility</strong>--<strong>one reason to change</strong>.</p>
+
+<p>Too many of us think that we are done once the program works. We move on the next problem rather than going back and breaking the classes into decoupled units with single responsibilities.</p>
+
+<p>We have to organize system complexity. A developer should know where to llok to find things and need only understand the directly affected complexity at any given time.</p>
+
+<p>We want systems composed of many small classes. Single responsibility and single reason to change. They colaborate with a few others to achieve the desired system behavior.</p>
+<h2 id='cohesion'>Cohesion</h2>
+<p>Small number of instance variables =&gt; each method manipulates one or more of those variables. =&gt; more variables manipulate =&gt; more cohesive a method is.</p>
+
+<p>A class in wich each variable is used by each method is maximally cohesive.</p>
+<h2 id='maintaining-cohesion-results-in-many-small-classes'>Maintaining Cohesion Results in Many Small Classes</h2>
+<p>When classes lose cohesion split them!</p>
+
+<p>Breaking a large function into many smaller functions often gives us the opportunity to split several smaller classes out as well =&gt; better organization and more transparent structure.</p>
+
+<p>Do it with tests =&gt; write a test suit that verified the precise behavior of the first version. Then tiny little changes, one at a time to get the desired result.</p>
+<h2 id='organizing-for-change'>Organizing for Change</h2>
+<p><strong>Open-Closed Principle</strong> =&gt; Our classes should be open for extension but closed for modification.</p>
+
+<p>Allow new functionality via subclassing.</p>
+
+<p>We incorporate new features by extending the system, not by making modifications to existing code.</p>
+<h2 id='isolating-from-change'>Isolating from Change</h2>
+<p><strong>Dependency Inversion Principle (DIP)</strong> =&gt; Classes should depend upon abstractions, not on concrete details.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="java">java</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
