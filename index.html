@@ -351,6 +351,72 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#chapter-11-system" class="toc-h1 toc-link" data-title="Chapter 11 System">Chapter 11 System</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#separate-constructing-a-system-from-using-it" class="toc-h2 toc-link" data-title="Separate constructing a system from using it">Separate constructing a system from using it</a>
+                  </li>
+                  <li>
+                    <a href="#separation-of-concerns" class="toc-h2 toc-link" data-title="Separation of Concerns">Separation of Concerns</a>
+                  </li>
+                  <li>
+                    <a href="#cross-cutting-concerns" class="toc-h2 toc-link" data-title="Cross-cutting Concerns">Cross-cutting Concerns</a>
+                  </li>
+                  <li>
+                    <a href="#how-ejb-improves-using-aop" class="toc-h2 toc-link" data-title="How EJB improves using AOP">How EJB improves using AOP</a>
+                  </li>
+                  <li>
+                    <a href="#test-drive-the-system-architecture" class="toc-h2 toc-link" data-title="Test Drive the System Architecture">Test Drive the System Architecture</a>
+                  </li>
+                  <li>
+                    <a href="#domain-specific-language-dsl" class="toc-h2 toc-link" data-title="Domain Specific Language(DSL)">Domain Specific Language(DSL)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-12-emergence" class="toc-h1 toc-link" data-title="Chapter 12 Emergence">Chapter 12 Emergence</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#runs-all-the-tests" class="toc-h2 toc-link" data-title="Runs All the Tests">Runs All the Tests</a>
+                  </li>
+                  <li>
+                    <a href="#refactoring" class="toc-h2 toc-link" data-title="Refactoring">Refactoring</a>
+                  </li>
+                  <li>
+                    <a href="#no-duplication" class="toc-h2 toc-link" data-title="No Duplication">No Duplication</a>
+                  </li>
+                  <li>
+                    <a href="#expressive" class="toc-h2 toc-link" data-title="Expressive">Expressive</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-13-concurrency" class="toc-h1 toc-link" data-title="Chapter 13 Concurrency">Chapter 13 Concurrency</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#why-concurrency" class="toc-h2 toc-link" data-title="Why Concurrency">Why Concurrency</a>
+                  </li>
+                  <li>
+                    <a href="#principles-for-concurrent-code" class="toc-h2 toc-link" data-title="Principles for concurrent code">Principles for concurrent code</a>
+                  </li>
+                  <li>
+                    <a href="#know-your-library" class="toc-h2 toc-link" data-title="Know your library">Know your library</a>
+                  </li>
+                  <li>
+                    <a href="#know-your-execution-models" class="toc-h2 toc-link" data-title="Know your Execution Models">Know your Execution Models</a>
+                  </li>
+                  <li>
+                    <a href="#beware-dependencies-between-synchronized-methods" class="toc-h2 toc-link" data-title="Beware Dependencies between Synchronized Methods">Beware Dependencies between Synchronized Methods</a>
+                  </li>
+                  <li>
+                    <a href="#testing-threaded-cdoe" class="toc-h2 toc-link" data-title="Testing Threaded Cdoe">Testing Threaded Cdoe</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chapter-14-successive-refinement" class="toc-h1 toc-link" data-title="Chapter 14 Successive Refinement">Chapter 14 Successive Refinement</a>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
@@ -931,7 +997,476 @@ Benefit: test for Portfolio could be decoupled from real exchange</p>
 <p>DIP  is about the level of the abstraction in the messages sent from your code to the thing it is calling. To be sure, using DI or IoC with DIP tends to be more expressive, powerful and domain-aligned, but they are about different dimensions, or forces, in an overall problem.</p>
 
 <p>DI is about wiring, IoC is about direction, and DIP is about shape.</p>
+<h1 id='chapter-11-system'>Chapter 11 System</h1><h2 id='separate-constructing-a-system-from-using-it'>Separate constructing a system from using it</h2><pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="n">Service</span> <span class="nf">getService</span><span class="o">()</span> <span class="o">{</span> 
+  <span class="k">if</span> <span class="o">(</span><span class="n">service</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+    <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyServiceImpl</span><span class="o">(...);</span> <span class="c1">// Good enough default for most cases? return service;</span>
+<span class="o">}</span>
 
+</code></pre>
+<ul>
+<li>Don&#39;t mix constructing with runtime execuation logic</li>
+<li>Lazy initialization is convenient, but no!</li>
+<li>Should have a global, consistent strategy for resolving dependencies</li>
+</ul>
+<h3 id='solutions'>Solutions</h3>
+<ul>
+<li>Dependency Injection
+
+<ul>
+<li>DI container initiate object using factory pattern</li>
+<li>DI container inject dependency using class setter(Inversion of Control)</li>
+</ul></li>
+<li>Decouple runtime from implementation of construction</li>
+</ul>
+<h2 id='separation-of-concerns'>Separation of Concerns</h2>
+<blockquote>
+<p>EJB2 example (Enterprise Java Bean)</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">banking</span><span class="o">;</span> 
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span> 
+<span class="kn">import</span> <span class="nn">javax.ejb.*</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Bank</span> <span class="kd">implements</span> <span class="n">javax</span><span class="o">.</span><span class="na">ejb</span><span class="o">.</span><span class="na">EntityBean</span> <span class="o">{</span> <span class="c1">// Business logic...</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">getStreetAddr1</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">getStreetAddr2</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">getCity</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">getState</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">getZipCode</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setStreetAddr1</span><span class="o">(</span><span class="n">String</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setStreetAddr2</span><span class="o">(</span><span class="n">String</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setCity</span><span class="o">(</span><span class="n">String</span> <span class="n">city</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setState</span><span class="o">(</span><span class="n">String</span> <span class="n">state</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setZipCode</span><span class="o">(</span><span class="n">String</span> <span class="n">zip</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Collection</span> <span class="nf">getAccounts</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setAccounts</span><span class="o">(</span><span class="n">Collection</span> <span class="n">accounts</span><span class="o">);</span> 
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addAccount</span><span class="o">(</span><span class="n">AccountDTO</span> <span class="n">accountDTO</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">InitialContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InitialContext</span><span class="o">();</span>
+    <span class="n">AccountHomeLocal</span> <span class="n">accountHome</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">lookup</span><span class="o">(</span><span class="s">"AccountHomeLocal"</span><span class="o">);</span> <span class="n">AccountLocal</span> <span class="n">account</span> <span class="o">=</span> <span class="n">accountHome</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">accountDTO</span><span class="o">);</span>
+    <span class="n">Collection</span> <span class="n">accounts</span> <span class="o">=</span> <span class="n">getAccounts</span><span class="o">();</span>
+    <span class="n">accounts</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">account</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="c1">// EJB container logic</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Integer</span> <span class="nf">getId</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">ejbCreate</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejbPostCreate</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="c1">// The rest had to be implemented but were usually empty: public void setEntityContext(EntityContext ctx) {} public void unsetEntityContext() {}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejbActivate</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejbPassivate</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejbLoad</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejbStore</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejbRemove</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
+</code></pre>
+<ul>
+<li>Class should have only one responsibility (Single Responsibility Principle)</li>
+<li>Example: tight coupling of bean class with business logic
+
+<ul>
+<li>Hard to test</li>
+<li>Undermine OO concept</li>
+</ul></li>
+</ul>
+<h2 id='cross-cutting-concerns'>Cross-cutting Concerns</h2>
+<blockquote>
+<p>Proxy Pattern</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="c1">// Bank.java (suppressing package names...) </span>
+<span class="kn">import</span> <span class="nn">java.utils.*</span><span class="o">;</span>
+
+<span class="c1">// The abstraction of a bank. </span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Bank</span> <span class="o">{</span>
+  <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="nf">getAccounts</span><span class="o">();</span>
+  <span class="kt">void</span> <span class="nf">setAccounts</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="n">accounts</span><span class="o">);</span> 
+<span class="o">}</span>
+
+<span class="c1">// BankImpl.java </span>
+<span class="kn">import</span> <span class="nn">java.utils.*</span><span class="o">;</span>
+
+<span class="c1">// The “Plain Old Java Object” (POJO) implementing the abstraction. </span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BankImpl</span> <span class="kd">implements</span> <span class="n">Bank</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="n">accounts</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="nf">getAccounts</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="k">return</span> <span class="n">accounts</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAccounts</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="n">accounts</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">accounts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;();</span> 
+    <span class="k">for</span> <span class="o">(</span><span class="n">Account</span> <span class="nl">account:</span> <span class="n">accounts</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">accounts</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">account</span><span class="o">);</span> 
+    <span class="o">}</span>
+  <span class="o">}</span> 
+<span class="o">}</span>
+
+
+<span class="c1">// BankProxyHandler.java </span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.*</span><span class="o">;</span> 
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="c1">// “InvocationHandler” required by the proxy API.</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BankProxyHandler</span> <span class="kd">implements</span> <span class="n">InvocationHandler</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Bank</span> <span class="n">bank</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="nf">BankHandler</span> <span class="o">(</span><span class="n">Bank</span> <span class="n">bank</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">bank</span> <span class="o">=</span> <span class="n">bank</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="c1">// Method defined in InvocationHandler</span>
+<span class="kd">public</span> <span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+<span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+  <span class="n">String</span> <span class="n">methodName</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span> 
+  <span class="k">if</span> <span class="o">(</span><span class="n">methodName</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"getAccounts"</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">bank</span><span class="o">.</span><span class="na">setAccounts</span><span class="o">(</span><span class="n">getAccountsFromDatabase</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">bank</span><span class="o">.</span><span class="na">getAccounts</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">methodName</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"setAccounts"</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">bank</span><span class="o">.</span><span class="na">setAccounts</span><span class="o">((</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;)</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span> <span class="n">setAccountsToDatabase</span><span class="o">(</span><span class="n">bank</span><span class="o">.</span><span class="na">getAccounts</span><span class="o">());</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="o">...</span> <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="c1">// Lots of details here</span>
+  <span class="kd">protected</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="nf">getAccountsFromDatabase</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setAccountsToDatabase</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="n">accounts</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Somewhere else...</span>
+<span class="n">Bank</span> <span class="n">bank</span> <span class="o">=</span> <span class="o">(</span><span class="n">Bank</span><span class="o">)</span> <span class="n">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span> 
+  <span class="n">Bank</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">(),</span>
+  <span class="k">new</span> <span class="n">Class</span><span class="o">[]</span> <span class="o">{</span> <span class="n">Bank</span><span class="o">.</span><span class="na">class</span> <span class="o">},</span>
+  <span class="k">new</span> <span class="nf">BankProxyHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">BankImpl</span><span class="o">()));</span>
+
+</code></pre>
+<ul>
+<li>How can we share common works(logging, transaction, etc.) in different codebases?</li>
+<li>Use AOP(aspect-oriented programming) via Proxy Pattern
+
+<ul>
+<li>Proxy class execute target class&#39;s method using decarator way</li>
+<li>Put *cross-cutting concerns* inside proxy class</li>
+</ul></li>
+</ul>
+<h2 id='how-ejb-improves-using-aop'>How EJB improves using AOP</h2>
+<blockquote>
+<p>EJB final version</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">banking</span><span class="o">.</span><span class="na">model</span><span class="o">;</span> 
+<span class="kn">import</span> <span class="nn">javax.persistence.*</span><span class="o">;</span> 
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span> 
+<span class="kn">import</span> <span class="nn">java.util.Collection</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"BANKS"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bank</span> <span class="kd">implements</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{</span>
+  <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">GenerationType</span><span class="o">.</span><span class="na">AUTO</span><span class="o">)</span> 
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+
+  <span class="nd">@Embeddable</span> <span class="c1">// An object “inlined” in Bank’s DB row </span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Address</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">streetAddr1</span><span class="o">;</span> 
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">streetAddr2</span><span class="o">;</span> 
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span> 
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">state</span><span class="o">;</span> 
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">zipCode</span><span class="o">;</span>
+  <span class="o">}</span>
+
+
+  <span class="nd">@Embedded</span>
+  <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>
+
+  <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">cascade</span> <span class="o">=</span> <span class="n">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">,</span> <span class="n">fetch</span> <span class="o">=</span> <span class="n">FetchType</span><span class="o">.</span><span class="na">EAGER</span><span class="o">,</span> 
+             <span class="n">mappedBy</span><span class="o">=</span><span class="s">"bank"</span><span class="o">)</span>
+
+  <span class="kd">private</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="n">accounts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;();</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addAccount</span><span class="o">(</span><span class="n">Account</span> <span class="n">account</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="n">account</span><span class="o">.</span><span class="na">setBank</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> 
+    <span class="n">accounts</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">account</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="nf">getAccounts</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="k">return</span> <span class="n">accounts</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAccounts</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Account</span><span class="o">&gt;</span> <span class="n">accounts</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">accounts</span> <span class="o">=</span> <span class="n">accounts</span><span class="o">;</span>
+  <span class="o">}</span> 
+<span class="o">}</span>
+
+</code></pre>
+<ul>
+<li> Removing mixing logic(db and business related) </li>
+<li> Using AOP to move cross-cutting concerns to top level(config/annotation)</li>
+<li> Keep target class focus on logic, so easy to test!</li>
+</ul>
+<h2 id='test-drive-the-system-architecture'>Test Drive the System Architecture</h2>
+<ul>
+<li>Let&#39;s each component focus on their jobs(business logic, caching, security virtualization etc..)</li>
+<li>Different component integrated together with Aspect-oriented programming</li>
+<li>Easy to test, easy to evolve</li>
+</ul>
+<h2 id='domain-specific-language-dsl'>Domain Specific Language(DSL)</h2>
+<ul>
+<li>todo </li>
+</ul>
+<h1 id='chapter-12-emergence'>Chapter 12 Emergence</h1><h2 id='runs-all-the-tests'>Runs All the Tests</h2>
+<ul>
+<li>Systyem should be testable and verifiable</li>
+<li>Better design(SRP, DIP) leads to easy testable system and vice versa</li>
+</ul>
+<h2 id='refactoring'>Refactoring</h2>
+<ul>
+<li>Prerequisite: testable system</li>
+<li>Goal: increase cohesion, decrease coupling, separate concerns, modularize system concers etc..</li>
+</ul>
+<h2 id='no-duplication'>No Duplication</h2>
+<blockquote>
+<p>Duplication of implementation</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scaleToOneDimension</span><span class="o">(</span><span class="kt">float</span> <span class="n">desiredDimension</span><span class="o">,</span> <span class="kt">float</span> <span class="n">imageDimension</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">desiredDimension</span> <span class="o">-</span> <span class="n">imageDimension</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">errorThreshold</span><span class="o">)</span> 
+      <span class="k">return</span><span class="o">;</span>
+
+    <span class="kt">float</span> <span class="n">scalingFactor</span> <span class="o">=</span> <span class="n">desiredDimension</span> <span class="o">/</span> <span class="n">imageDimension</span><span class="o">;</span> 
+    <span class="n">scalingFactor</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">floor</span><span class="o">(</span><span class="n">scalingFactor</span> <span class="o">*</span> <span class="mi">100</span><span class="o">)</span> <span class="o">*</span> <span class="mf">0.01f</span><span class="o">);</span>
+    <span class="n">RenderedOp</span> <span class="n">newImage</span> <span class="o">=</span> <span class="n">ImageUtilities</span><span class="o">.</span><span class="na">getScaledImage</span><span class="o">(</span> <span class="n">image</span><span class="o">,</span> <span class="n">scalingFactor</span><span class="o">,</span> <span class="n">scalingFactor</span><span class="o">);</span>
+    <span class="n">image</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span> 
+    <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span> 
+    <span class="n">image</span> <span class="o">=</span> <span class="n">newImage</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span><span class="kt">int</span> <span class="n">degrees</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">RenderedOp</span> <span class="n">newImage</span> <span class="o">=</span> <span class="n">ImageUtilities</span><span class="o">.</span><span class="na">getRotatedImage</span><span class="o">(</span> <span class="n">image</span><span class="o">,</span> <span class="n">degrees</span><span class="o">);</span>
+    <span class="n">image</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span> <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span> <span class="n">image</span> <span class="o">=</span> <span class="n">newImage</span><span class="o">;</span>
+  <span class="o">}</span>
+
+<span class="c1">/////////////////////////////////////////////////////////////////////////////////////</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scaleToOneDimension</span><span class="o">(</span><span class="kt">float</span> <span class="n">desiredDimension</span><span class="o">,</span> <span class="kt">float</span> <span class="n">imageDimension</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">desiredDimension</span> <span class="o">-</span> <span class="n">imageDimension</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">errorThreshold</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">scalingFactor</span> <span class="o">=</span> <span class="n">desiredDimension</span> <span class="o">/</span> <span class="n">imageDimension</span><span class="o">;</span> 
+    <span class="n">scalingFactor</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">floor</span><span class="o">(</span><span class="n">scalingFactor</span> <span class="o">*</span> <span class="mi">100</span><span class="o">)</span> <span class="o">*</span> <span class="mf">0.01f</span><span class="o">);</span>
+
+    <span class="n">replaceImage</span><span class="o">(</span><span class="n">ImageUtilities</span><span class="o">.</span><span class="na">getScaledImage</span><span class="o">(</span> <span class="n">image</span><span class="o">,</span> <span class="n">scalingFactor</span><span class="o">,</span> <span class="n">scalingFactor</span><span class="o">));</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span><span class="kt">int</span> <span class="n">degrees</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">replaceImage</span><span class="o">(</span><span class="n">ImageUtilities</span><span class="o">.</span><span class="na">getRotatedImage</span><span class="o">(</span><span class="n">image</span><span class="o">,</span> <span class="n">degrees</span><span class="o">));</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">replaceImage</span><span class="o">(</span><span class="n">RenderedOp</span> <span class="n">newImage</span><span class="o">)</span> <span class="o">{</span> <span class="n">i</span>
+    <span class="n">mage</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">newImage</span><span class="o">;</span>
+  <span class="o">}</span>
+
+</code></pre>
+<blockquote>
+<p>Template Design</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">abstract</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">VacationPolicy</span> <span class="o">{</span> 
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">accrueVacation</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">calculateBaseVacationHours</span><span class="o">();</span>
+    <span class="n">alterForLegalMinimums</span><span class="o">();</span>
+    <span class="n">applyToPayroll</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">calculateBaseVacationHours</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* ... */</span> <span class="o">};</span> 
+  <span class="kd">abstract</span> <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">alterForLegalMinimums</span><span class="o">();</span> 
+  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">applyToPayroll</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* ... */</span> <span class="o">};</span>
+<span class="o">}</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">USVacationPolicy</span> <span class="kd">extends</span> <span class="n">VacationPolicy</span> <span class="o">{</span> 
+  <span class="nd">@Override</span> <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">alterForLegalMinimums</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// US specific logic </span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EUVacationPolicy</span> <span class="kd">extends</span> <span class="n">VacationPolicy</span> <span class="o">{</span> 
+  <span class="nd">@Override</span> <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">alterForLegalMinimums</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// EU specific logic </span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<ul>
+<li>No duplication of implementation</li>
+<li>Template method (OOP)</li>
+</ul>
+<h2 id='expressive'>Expressive</h2>
+<ul>
+<li>Code should have readibility, for next person to get to understand easily</li>
+<li>Good naming, standard desing pattern, small function etc</li>
+</ul>
+<h1 id='chapter-13-concurrency'>Chapter 13 Concurrency</h1><h2 id='why-concurrency'>Why Concurrency</h2>
+<ul>
+<li>Structre: decouple what from when</li>
+<li>Performance:
+
+<ul>
+<li>Daily information aggregator, i/o wait</li>
+<li>Interative system(UI), request/response</li>
+<li>Dataset that can be processed parallel</li>
+</ul></li>
+</ul>
+<h3 id='myths-and-misconceptions'>Myths and Misconceptions</h3>
+<ul>
+<li>Concurrency always improves performance
+
+<ul>
+<li>Only when there is  a lot of wait time an be shread btw threads</li>
+</ul></li>
+<li>Design does not change when writing concurrency programs
+
+<ul>
+<li>Design does change</li>
+</ul></li>
+<li>Understanding concurrency issues is not important when using Web framework
+
+<ul>
+<li>It is important so that we can handle issues like concurrency update and deaklock</li>
+</ul></li>
+</ul>
+<h2 id='principles-for-concurrent-code'>Principles for concurrent code</h2><h3 id='keep-concurrency-related-code-separate-from-other-code'>Keep concurrency-related code separate from other code</h3>
+<ul>
+<li>Concurrency design is complex enough to be a reason to change</li>
+<li>Single responsibility principle</li>
+</ul>
+<h3 id='limit-the-scope-of-data'>Limit the scope of Data</h3>
+<ul>
+<li>Limit usage of code that will update shared data</li>
+</ul>
+<h3 id='use-copies-of-data'>Use copies of data</h3>
+<ul>
+<li>Avoid race condition</li>
+<li>Common approachs
+
+<ul>
+<li>Read only, so no update</li>
+<li>Copy each objects, merge each results later in one single thread</li>
+</ul></li>
+</ul>
+<h3 id='threas-should-be-as-independent-as-possible'>Threas should be as independent as Possible</h3>
+<ul>
+<li>All local variables</li>
+<li>No lock(no sychronized block)</li>
+</ul>
+<h2 id='know-your-library'>Know your library</h2>
+<ul>
+<li>Use the provided thread-safe collections.</li>
+<li>Use the executor framework for executing unrelated tasks. ?</li>
+<li>Use nonblocking solutions when possible.</li>
+<li>Several library classes are not thread safe.</li>
+</ul>
+<h2 id='know-your-execution-models'>Know your Execution Models</h2>
+<ul>
+<li>Three common patterns:
+
+<ul>
+<li>Producer-Consumer</li>
+<li>Reader-Writer</li>
+<li>Dining Philosohers</li>
+</ul></li>
+<li>Learn these basic algorithms and understand their solutions</li>
+</ul>
+<h2 id='beware-dependencies-between-synchronized-methods'>Beware Dependencies between Synchronized Methods</h2>
+<ul>
+<li>Avoid using more than one method on a shared object</li>
+<li>If can&#39;t avoid, then:
+
+<ul>
+<li>Client-Based Locking </li>
+<li>Server-Based Locking </li>
+<li>Adapted Server</li>
+</ul></li>
+</ul>
+<h2 id='testing-threaded-cdoe'>Testing Threaded Cdoe</h2>
+<ul>
+<li>Treat Spurious Failures as Candidate Threading Issues, dont ignore them!</li>
+<li>Get your nonthreaded code working first</li>
+<li>Make your threaded code pluggable</li>
+<li>Make your Threaded code tunable</li>
+<li>Run with more threads than processors, to make sure system switches between tasks</li>
+<li>Run on Different platforms</li>
+<li>Instrument your code to try and force failures
+
+<ul>
+<li>Hand-Coded</li>
+<li>AUtomated using AOP</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>Hand-Coded</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">synchronized</span> <span class="n">String</span> <span class="nf">nextUrlOrNull</span><span class="o">()</span> <span class="o">{</span> 
+  <span class="k">if</span><span class="o">(</span><span class="n">hasNext</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">urlGenerator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> 
+    <span class="n">Thread</span><span class="o">.</span><span class="na">yield</span><span class="o">();</span> <span class="c1">// inserted for testing. </span>
+    <span class="n">updateHasNext</span><span class="o">();</span>
+    <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> 
+<span class="o">}</span>
+
+</code></pre>
+<blockquote>
+<p>Automated</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadJigglePoint</span> <span class="o">{</span> 
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">jiggle</span><span class="o">()</span> <span class="o">{</span> 
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">synchronized</span> <span class="n">String</span> <span class="nf">nextUrlOrNull</span><span class="o">()</span> <span class="o">{</span> 
+  <span class="k">if</span><span class="o">(</span><span class="n">hasNext</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">ThreadJiglePoint</span><span class="o">.</span><span class="na">jiggle</span><span class="o">();</span> 
+    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">urlGenerator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> 
+    <span class="n">ThreadJiglePoint</span><span class="o">.</span><span class="na">jiggle</span><span class="o">();</span> 
+    <span class="n">updateHasNext</span><span class="o">();</span> 
+    <span class="n">ThreadJiglePoint</span><span class="o">.</span><span class="na">jiggle</span><span class="o">();</span> 
+    <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> 
+<span class="o">}</span>
+
+</code></pre><h1 id='chapter-14-successive-refinement'>Chapter 14 Successive Refinement</h1>
+<ul>
+<li>There is no excuse to have bad code!</li>
+<li>Test is required to refactoring</li>
+</ul>
+
+<blockquote>
+<p>Duplication of implementation</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">objectmentor</span><span class="o">.</span><span class="na">utilities</span><span class="o">.</span><span class="na">args</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">objectmentor</span><span class="o">.</span><span class="na">utilities</span><span class="o">.</span><span class="na">args</span><span class="o">.</span><span class="na">ArgsException</span><span class="o">.</span><span class="na">ErrorCode</span><span class="o">.*;</span> 
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Args</span> <span class="o">{</span>
+  <span class="o">...</span>
+  <span class="o">...</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+  <span class="err">略</span>
+
+<span class="o">}</span>
+
+</code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
