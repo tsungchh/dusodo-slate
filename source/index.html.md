@@ -13,6 +13,10 @@ includes:
   - cp_08_boundaries
   - cp_09_unit_tests
   - cp_10_classes
+  - cp_11_system
+  - cp_12_emergence
+  - cp_13_concurrency
+  - cp_14_succesive_refinement
 
 search: true
 ---
